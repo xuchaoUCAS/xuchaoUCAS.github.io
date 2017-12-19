@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="article,chax," />
 
 
 
@@ -79,12 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="使用TensorFlow实现LSTM1. 预备知识比较经典的博客:Understanding LSTM Networks中文版:理解LSTM网络2. TensorFlow相关函数 unstack 1unstack(value, num=Nonde, axis=0, name=&amp;apos;unstack&amp;apos;)   将rank-R维的tensor分解为R-1维(会降维)的list。以一个常见的">
+<meta name="keywords" content="article,chax">
+<meta property="og:type" content="article">
+<meta property="og:title" content="first article by myself">
+<meta property="og:url" content="http://yoursite.com/2017/12/19/first-article-by-myself/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="使用TensorFlow实现LSTM1. 预备知识比较经典的博客:Understanding LSTM Networks中文版:理解LSTM网络2. TensorFlow相关函数 unstack 1unstack(value, num=Nonde, axis=0, name=&amp;apos;unstack&amp;apos;)   将rank-R维的tensor分解为R-1维(会降维)的list。以一个常见的">
+<meta property="og:updated_time" content="2017-12-19T11:00:19.858Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="first article by myself">
+<meta name="twitter:description" content="使用TensorFlow实现LSTM1. 预备知识比较经典的博客:Understanding LSTM Networks中文版:理解LSTM网络2. TensorFlow相关函数 unstack 1unstack(value, num=Nonde, axis=0, name=&amp;apos;unstack&amp;apos;)   将rank-R维的tensor分解为R-1维(会降维)的list。以一个常见的">
 
 
 
@@ -114,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/12/19/first-article-by-myself/"/>
 
 
 
 
 
-  <title>Hexo</title>
+  <title>first article by myself | Hexo</title>
   
 
 
@@ -139,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -213,9 +217,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -245,9 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/19/first-article-by-myself/" itemprop="url">first article by myself</a></h1>
+          <h1 class="post-title" itemprop="name headline">first article by myself</h1>
         
 
         <div class="post-meta">
@@ -297,9 +299,7 @@
       
 
       
-        
-          
-            <h1 id="使用TensorFlow实现LSTM"><a href="#使用TensorFlow实现LSTM" class="headerlink" title="使用TensorFlow实现LSTM"></a>使用TensorFlow实现LSTM</h1><h1 id="1-预备知识"><a href="#1-预备知识" class="headerlink" title="1. 预备知识"></a>1. 预备知识</h1><h4 id="比较经典的博客-Understanding-LSTM-Networks"><a href="#比较经典的博客-Understanding-LSTM-Networks" class="headerlink" title="比较经典的博客:Understanding LSTM Networks"></a>比较经典的博客:<a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="noopener">Understanding LSTM Networks</a></h4><h4 id="中文版-理解LSTM网络"><a href="#中文版-理解LSTM网络" class="headerlink" title="中文版:理解LSTM网络"></a>中文版:<a href="http://www.jeyzhang.com/understanding-lstm-network.html" target="_blank" rel="noopener">理解LSTM网络</a></h4><h1 id="2-TensorFlow相关函数"><a href="#2-TensorFlow相关函数" class="headerlink" title="2. TensorFlow相关函数"></a>2. TensorFlow相关函数</h1><ul>
+        <h1 id="使用TensorFlow实现LSTM"><a href="#使用TensorFlow实现LSTM" class="headerlink" title="使用TensorFlow实现LSTM"></a>使用TensorFlow实现LSTM</h1><h1 id="1-预备知识"><a href="#1-预备知识" class="headerlink" title="1. 预备知识"></a>1. 预备知识</h1><h4 id="比较经典的博客-Understanding-LSTM-Networks"><a href="#比较经典的博客-Understanding-LSTM-Networks" class="headerlink" title="比较经典的博客:Understanding LSTM Networks"></a>比较经典的博客:<a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="noopener">Understanding LSTM Networks</a></h4><h4 id="中文版-理解LSTM网络"><a href="#中文版-理解LSTM网络" class="headerlink" title="中文版:理解LSTM网络"></a>中文版:<a href="http://www.jeyzhang.com/understanding-lstm-network.html" target="_blank" rel="noopener">理解LSTM网络</a></h4><h1 id="2-TensorFlow相关函数"><a href="#2-TensorFlow相关函数" class="headerlink" title="2. TensorFlow相关函数"></a>2. TensorFlow相关函数</h1><ul>
 <li><p>unstack</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unstack(value, num=Nonde, axis=0, name=&apos;unstack&apos;)</span><br></pre></td></tr></table></figure>
 </li>
@@ -369,8 +369,6 @@
 <li><a href="https://github.com/aymericdamien/TensorFlow-Examples" target="_blank" rel="noopener">TensorFlow-Examples</a></li>
 </ol>
 
-          
-        
       
     </div>
     
@@ -385,142 +383,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/18/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/18/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-18T17:13:39+08:00">
-                2017-12-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/article/" rel="tag"># article</a>
           
-            
+            <a href="/tags/chax/" rel="tag"># chax</a>
           
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/18/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -530,10 +424,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -541,6 +436,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -561,8 +460,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -615,6 +523,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用TensorFlow实现LSTM"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4F7F;&#x7528;TensorFlow&#x5B9E;&#x73B0;LSTM" class="headerlink" title="&#x4F7F;&#x7528;TensorFlow&#x5B9E;&#x73B0;LSTM"></a>&#x4F7F;&#x7528;TensorFlow&#x5B9E;&#x73B0;LSTM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-预备知识"><span class="nav-number">2.</span> <span class="nav-text"><a href="#1-&#x9884;&#x5907;&#x77E5;&#x8BC6;" class="headerlink" title="1. &#x9884;&#x5907;&#x77E5;&#x8BC6;"></a>1. &#x9884;&#x5907;&#x77E5;&#x8BC6;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#比较经典的博客-Understanding-LSTM-Networks"><span class="nav-number">2.0.0.1.</span> <span class="nav-text"><a href="#&#x6BD4;&#x8F83;&#x7ECF;&#x5178;&#x7684;&#x535A;&#x5BA2;-Understanding-LSTM-Networks" class="headerlink" title="&#x6BD4;&#x8F83;&#x7ECF;&#x5178;&#x7684;&#x535A;&#x5BA2;:Understanding LSTM Networks"></a>&#x6BD4;&#x8F83;&#x7ECF;&#x5178;&#x7684;&#x535A;&#x5BA2;:<a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="noopener">Understanding LSTM Networks</a></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中文版-理解LSTM网络"><span class="nav-number">2.0.0.2.</span> <span class="nav-text"><a href="#&#x4E2D;&#x6587;&#x7248;-&#x7406;&#x89E3;LSTM&#x7F51;&#x7EDC;" class="headerlink" title="&#x4E2D;&#x6587;&#x7248;:&#x7406;&#x89E3;LSTM&#x7F51;&#x7EDC;"></a>&#x4E2D;&#x6587;&#x7248;:<a href="http://www.jeyzhang.com/understanding-lstm-network.html" target="_blank" rel="noopener">&#x7406;&#x89E3;LSTM&#x7F51;&#x7EDC;</a></span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-TensorFlow相关函数"><span class="nav-number">3.</span> <span class="nav-text"><a href="#2-TensorFlow&#x76F8;&#x5173;&#x51FD;&#x6570;" class="headerlink" title="2. TensorFlow&#x76F8;&#x5173;&#x51FD;&#x6570;"></a>2. TensorFlow&#x76F8;&#x5173;&#x51FD;&#x6570;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-static-rnn-VS-dynamic-rnn"><span class="nav-number">4.</span> <span class="nav-text"><a href="#3-static-rnn-VS-dynamic-rnn" class="headerlink" title="3. static_rnn VS dynamic_rnn"></a>3. static_rnn VS dynamic_rnn</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#TensorFlow中内置的rnn有两种：tf-contrib-rnn-static-rnn-之前版本是tf-nn-rnn-和tf-nn-dynamic-rnn"><span class="nav-number">4.0.0.0.0.1.</span> <span class="nav-text"><a href="#TensorFlow&#x4E2D;&#x5185;&#x7F6E;&#x7684;rnn&#x6709;&#x4E24;&#x79CD;&#xFF1A;tf-contrib-rnn-static-rnn-&#x4E4B;&#x524D;&#x7248;&#x672C;&#x662F;tf-nn-rnn-&#x548C;tf-nn-dynamic-rnn" class="headerlink" title="TensorFlow&#x4E2D;&#x5185;&#x7F6E;&#x7684;rnn&#x6709;&#x4E24;&#x79CD;&#xFF1A;tf.contrib.rnn.static_rnn(&#x4E4B;&#x524D;&#x7248;&#x672C;&#x662F;tf.nn.rnn)&#x548C;tf.nn.dynamic_rnn"></a>TensorFlow&#x4E2D;&#x5185;&#x7F6E;&#x7684;rnn&#x6709;&#x4E24;&#x79CD;&#xFF1A;tf.contrib.rnn.static_rnn(&#x4E4B;&#x524D;&#x7248;&#x672C;&#x662F;tf.nn.rnn)&#x548C;tf.nn.dynamic_rnn</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-TensorFlow-Code"><span class="nav-number">5.</span> <span class="nav-text"><a href="#4-TensorFlow-Code" class="headerlink" title="4. TensorFlow Code"></a>4. TensorFlow Code</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mnist-数据集"><span class="nav-number">5.0.0.1.</span> <span class="nav-text"><a href="#mnist-&#x6570;&#x636E;&#x96C6;" class="headerlink" title="mnist &#x6570;&#x636E;&#x96C6;"></a>mnist &#x6570;&#x636E;&#x96C6;</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -748,6 +672,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
