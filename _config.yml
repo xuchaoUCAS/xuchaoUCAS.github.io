@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: chao's blog
 subtitle:
 description:
-author: John Doe
+author: xuchao
 language:
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://xuchaoucas.github.io/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -56,6 +56,9 @@ index_generator:
 default_category: uncategorized
 category_map:
 tag_map:
+  deep learning: dl
+  machine learning: ml
+  natural language understanding: nlu
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
