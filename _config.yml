@@ -74,6 +74,8 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: next
 
+
+disqus_shortname: xuchao0813.disqus.com
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
