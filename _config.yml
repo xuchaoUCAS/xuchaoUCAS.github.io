@@ -7,7 +7,7 @@ title: chao's blog
 subtitle:
 description:
 author: xuchao
-language:
+language: en
 timezone:
 
 # URL
@@ -16,6 +16,7 @@ url: https://xuchaoucas.github.io/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
+disqus_shortname: chao-website
 
 # Directory
 source_dir: source
@@ -78,7 +79,7 @@ pagination_dir: page
 theme: next
 
 
-disqus_shortname: chao-website.disqus.com
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
