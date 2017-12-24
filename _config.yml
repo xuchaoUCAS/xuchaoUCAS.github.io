@@ -13,7 +13,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: xuchaoucas.github.io
+url: https://xuchaoucas.github.io/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -26,7 +26,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
-disqus_shortname: chax
+disqus_shortname: xuchao
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
