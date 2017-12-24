@@ -1,21 +1,23 @@
 ---
 title: 从0到1用TensorFlow实现LSTM
 date: 2017-12-19 18:59:38
-tags: [Deep learning]
+tags:
+- Deep Learning
+- TensorFlow
+categories: 
+- Deep Learning
 ---
 
 # 预备知识
-#### 比较经典的博客:[Understanding LSTM Networks](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
-#### 中文版:[理解LSTM网络](http://www.jeyzhang.com/understanding-lstm-network.html)
+比较经典的博客:[Understanding LSTM Networks](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
+中文版:[理解LSTM网络](http://www.jeyzhang.com/understanding-lstm-network.html)
 # TensorFlow相关函数
 ## unstack
 ```
 unstack(value, num=Nonde, axis=0, name='unstack')
 ```
-将rank-R维的tensor分解为R-1维(会降维)的list。以一个常见的需要RNN处理的[batch_size, timesteps, n_input]为例，由于tensorflow.contrib.rnn.static_rnn的输入是[batch_size, n_input], 所以使用unstack可以轻松的将原始输入转化为需要的shape。 
-
+将rank-R维的tensor分解为R-1维(会降维)的list。以一个常见的需要RNN处理的[batch_size, timesteps, n_input]为例，由于tensorflow.contrib.rnn.static_rnn的输入是[batch_size, n_input], 所以使用unstack可以轻松的将原始输入转化为需要的shape。
 ## transpose
-
 ```
 transpose(a, perm=None, name='transpose')
 ```
@@ -40,21 +42,22 @@ split(value, num_or_size_splits, axis=0, num=None, name='split')
 ```
 将tensor按照axis的维度分解为子tensor的list(不会降维)。
 # static_rnn VS dynamic_rnn
-###### TensorFlow中内置的rnn有两种：tf.contrib.rnn.static_rnn(之前版本是tf.nn.rnn)和tf.nn.dynamic_rnn
+TensorFlow中内置的rnn有两种：tf.contrib.rnn.static_rnn(之前版本是tf.nn.rnn)和tf.nn.dynamic_rnn
 
-###### static_rnn会创建一个展开的rnn，但是其长度是固定的，也就是说，如果你第一次传进去的shape是200 timesteps的，那么就会创建一个静态的含有200次循环的rnn cell。这会导致两个问题：1. 创建过程会比较耗时 2. 一旦创建好了之后，就不可以再传入比第一次更长的timesteps的sequence了。
-##### 而dynamic_rnn解决了这个问题，它内部实现的时候是动态的创建rnn的循环图的。
-###### 所以，比较推荐使用dunamic_rnn来创建rnn或者相关的网络
+static_rnn会创建一个展开的rnn，但是其长度是固定的，也就是说，如果你第一次传进去的shape是200 timesteps的，那么就会创建一个静态的含有200次循环的rnn cell。这会导致两个问题：1. 创建过程会比较耗时 2. 一旦创建好了之后，就不可以再传入比第一次更长的timesteps的sequence了。
+
+而dynamic_rnn解决了这个问题，它内部实现的时候是动态的创建rnn的循环图的。
+所以，比较推荐使用dunamic_rnn来创建rnn或者相关的网络
+
 ## TensorFlow Code
 ### mnist 数据集
-###### TensorFlow中内置了mnist数据集，本文使用该数据集作为LSTM用于分类的例子
+TensorFlow中内置了mnist数据集，本文使用该数据集作为LSTM用于分类的例子
 
 ```
 from nnlayers.BasicLSTMLayer import BasicLSTMLayer
 mnist = input_data.read_data_sets('tmp/data', one_hot = True)
 ```
-###### 设置数据集的training次数、mnist的label数量、batch_size、time_steps&num_input(mnist中数据为28*28的图片)、num_hidden等参数
-- 
+### 设置数据集的training次数、mnist的label数量、batch_size、time_steps&num_input(mnist中数据为28*28的图片)、num_hidden等参数
 ```
 epochs = 10
 num_classes = 10
@@ -63,7 +66,7 @@ timesteps = 28
 num_input = 28
 num_hidden = 128
 ```
-###### 初始化网络rnn输入和输出之后全连接层的参数
+初始化网络rnn输入和输出之后全连接层的参数
 ```
 x = tf.placeholder('float', [None, timesteps, num_input])
 y = tf.placeholder('float', [None, num_classes])
@@ -72,8 +75,11 @@ layer = {'weights': tf.Variable(tf.random_normal([num_hidden, num_classes])),
 lstm_layer = BasicLSTMLayer(None, 'test_lstm_layer', None, None,
                             **{'num_hidden': num_hidden, 'input': x, 'timesteps': timesteps})
 ```
+
 ## LSTM的两种实现
+
 ### static_rnn
+
 ```
 x = tf.unstack(x, timesteps, 1)
 #equivalently:
@@ -83,12 +89,16 @@ x = tf.unstack(x, timesteps, 1)
 lstm_cell = rnn.BasicLSTMCell(num_hidden, forget_bias=1.0)
 outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)
 ```
+
 ### dynamic_rnn
+
 ```
 lstm_cell = rnn.BasicLSTMCell(num_hidden, forget_bias=1.0)
 outputs, states = tf.nn.dynamic_rnn(lstm_cell, x, time_major=False, dtype=tf.float32)
 ```
-## 对LSTM输出结果的处理
+
+### 对LSTM输出结果的处理
+
 ```
 # 如果使用static_rnn实现的话,这句话就不需要：
 outputs = tf.unstack(tf.transpose(outputs, [1, 0, 2])) #LSTM网络会将每个时刻的output append到outputs中,所以通过output[-1]取出最后一个时刻的输出
@@ -96,7 +106,9 @@ prediction = tf.add(tf.matmul(outputs[-1], layer['weights']), layer['biases']) #
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction, labels=y))#计算cost
 optimizer = tf.train.AdamOptimizer().minimize(cost)#优化网络中的参数
 ```
-## 将以上步骤串起来通过Session进行计算
+
+### 将以上步骤串起来通过Session进行计算
+
 ```
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
@@ -114,7 +126,9 @@ with tf.Session() as sess:
     accuracy = tf.reduce_mean(tf.cast(correct, 'float'))
     print('Accuracy:', accuracy.eval({x: mnist.test.images.reshape((-1, timesteps, num_input)), y: mnist.test.labels}))
 ```
-## 完成！最终的training Accuracy:
+
+### 完成！最终的training Accuracy:
+
 ```
 ……
 Epoch 7 completed out of 10 loss: 16.02936139
@@ -122,16 +136,6 @@ Epoch 8 completed out of 10 loss: 14.0518430057
 Epoch 9 completed out of 10 loss: 12.9981804799
 Accuracy: 0.9826
 ```
-
-
-
-
-
-
-
-
-
-
 # Reference
 1. [Understanding LSTM Networks](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
 2. [理解LSTM网络](http://www.jeyzhang.com/understanding-lstm-network.html)
