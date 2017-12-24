@@ -81,7 +81,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="chao&#39;s blog">
-<meta property="og:url" content="xuchaoucas.github.io/index.html">
+<meta property="og:url" content="https://xuchaoucas.github.io/index.html">
 <meta property="og:site_name" content="chao&#39;s blog">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
@@ -115,7 +115,7 @@
 
 
 
-  <link rel="canonical" href="xuchaoucas.github.io/"/>
+  <link rel="canonical" href="https://xuchaoucas.github.io/"/>
 
 
 
@@ -249,7 +249,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="xuchaoucas.github.io/2017/12/19/first-article-by-myself/">
+    <link itemprop="mainEntityOfPage" href="https://xuchaoucas.github.io/2017/12/19/first-article-by-myself/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xuchao">
@@ -331,33 +331,16 @@
       
         
           
-            <h1 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h1><h4 id="比较经典的博客-Understanding-LSTM-Networks"><a href="#比较经典的博客-Understanding-LSTM-Networks" class="headerlink" title="比较经典的博客:Understanding LSTM Networks"></a>比较经典的博客:<a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="noopener">Understanding LSTM Networks</a></h4><h4 id="中文版-理解LSTM网络"><a href="#中文版-理解LSTM网络" class="headerlink" title="中文版:理解LSTM网络"></a>中文版:<a href="http://www.jeyzhang.com/understanding-lstm-network.html" target="_blank" rel="noopener">理解LSTM网络</a></h4><h1 id="TensorFlow相关函数"><a href="#TensorFlow相关函数" class="headerlink" title="TensorFlow相关函数"></a>TensorFlow相关函数</h1><h2 id="unstack"><a href="#unstack" class="headerlink" title="unstack"></a>unstack</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unstack(value, num=Nonde, axis=0, name=&apos;unstack&apos;)</span><br></pre></td></tr></table></figure>
-<p>将rank-R维的tensor分解为R-1维(会降维)的list。以一个常见的需要RNN处理的[batch_size, timesteps, n_input]为例，由于tensorflow.contrib.rnn.static_rnn的输入是[batch_size, n_input], 所以使用unstack可以轻松的将原始输入转化为需要的shape。 </p>
-<h2 id="transpose"><a href="#transpose" class="headerlink" title="transpose"></a>transpose</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transpose(a, perm=None, name=&apos;transpose&apos;)</span><br></pre></td></tr></table></figure>
-<h3 id="For-example："><a href="#For-example：" class="headerlink" title="For example："></a>For example：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x = tf.constant([[1, 2, 3], [4, 5, 6]])</span><br><span class="line">tf.transpose(x)  # [[1, 4]</span><br><span class="line">                 #  [2, 5]</span><br><span class="line">                 #  [3, 6]]</span><br><span class="line">#perm是需要转置的维度表示</span><br><span class="line">tf.transpose(x, perm=[0, 2, 1])  # [[[1,  4],</span><br><span class="line">             #   [2,  5],</span><br><span class="line">             #   [3,  6]],</span><br><span class="line">             #  [[7, 10],</span><br><span class="line">             #   [8, 11],</span><br><span class="line">             #   [9, 12]]]</span><br></pre></td></tr></table></figure>
-<h2 id="split"><a href="#split" class="headerlink" title="split"></a>split</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">split(value, num_or_size_splits, axis=0, num=None, name=&apos;split&apos;)</span><br></pre></td></tr></table></figure>
-<p>将tensor按照axis的维度分解为子tensor的list(不会降维)。</p>
-<h1 id="static-rnn-VS-dynamic-rnn"><a href="#static-rnn-VS-dynamic-rnn" class="headerlink" title="static_rnn VS dynamic_rnn"></a>static_rnn VS dynamic_rnn</h1><h6 id="TensorFlow中内置的rnn有两种：tf-contrib-rnn-static-rnn-之前版本是tf-nn-rnn-和tf-nn-dynamic-rnn"><a href="#TensorFlow中内置的rnn有两种：tf-contrib-rnn-static-rnn-之前版本是tf-nn-rnn-和tf-nn-dynamic-rnn" class="headerlink" title="TensorFlow中内置的rnn有两种：tf.contrib.rnn.static_rnn(之前版本是tf.nn.rnn)和tf.nn.dynamic_rnn"></a>TensorFlow中内置的rnn有两种：tf.contrib.rnn.static_rnn(之前版本是tf.nn.rnn)和tf.nn.dynamic_rnn</h6><h6 id="static-rnn会创建一个展开的rnn，但是其长度是固定的，也就是说，如果你第一次传进去的shape是200-timesteps的，那么就会创建一个静态的含有200次循环的rnn-cell。这会导致两个问题：1-创建过程会比较耗时-2-一旦创建好了之后，就不可以再传入比第一次更长的timesteps的sequence了。"><a href="#static-rnn会创建一个展开的rnn，但是其长度是固定的，也就是说，如果你第一次传进去的shape是200-timesteps的，那么就会创建一个静态的含有200次循环的rnn-cell。这会导致两个问题：1-创建过程会比较耗时-2-一旦创建好了之后，就不可以再传入比第一次更长的timesteps的sequence了。" class="headerlink" title="static_rnn会创建一个展开的rnn，但是其长度是固定的，也就是说，如果你第一次传进去的shape是200 timesteps的，那么就会创建一个静态的含有200次循环的rnn cell。这会导致两个问题：1. 创建过程会比较耗时 2. 一旦创建好了之后，就不可以再传入比第一次更长的timesteps的sequence了。"></a>static_rnn会创建一个展开的rnn，但是其长度是固定的，也就是说，如果你第一次传进去的shape是200 timesteps的，那么就会创建一个静态的含有200次循环的rnn cell。这会导致两个问题：1. 创建过程会比较耗时 2. 一旦创建好了之后，就不可以再传入比第一次更长的timesteps的sequence了。</h6><h5 id="而dynamic-rnn解决了这个问题，它内部实现的时候是动态的创建rnn的循环图的。"><a href="#而dynamic-rnn解决了这个问题，它内部实现的时候是动态的创建rnn的循环图的。" class="headerlink" title="而dynamic_rnn解决了这个问题，它内部实现的时候是动态的创建rnn的循环图的。"></a>而dynamic_rnn解决了这个问题，它内部实现的时候是动态的创建rnn的循环图的。</h5><h6 id="所以，比较推荐使用dunamic-rnn来创建rnn或者相关的网络"><a href="#所以，比较推荐使用dunamic-rnn来创建rnn或者相关的网络" class="headerlink" title="所以，比较推荐使用dunamic_rnn来创建rnn或者相关的网络"></a>所以，比较推荐使用dunamic_rnn来创建rnn或者相关的网络</h6><h2 id="TensorFlow-Code"><a href="#TensorFlow-Code" class="headerlink" title="TensorFlow Code"></a>TensorFlow Code</h2><h3 id="mnist-数据集"><a href="#mnist-数据集" class="headerlink" title="mnist 数据集"></a>mnist 数据集</h3><h6 id="TensorFlow中内置了mnist数据集，本文使用该数据集作为LSTM用于分类的例子"><a href="#TensorFlow中内置了mnist数据集，本文使用该数据集作为LSTM用于分类的例子" class="headerlink" title="TensorFlow中内置了mnist数据集，本文使用该数据集作为LSTM用于分类的例子"></a>TensorFlow中内置了mnist数据集，本文使用该数据集作为LSTM用于分类的例子</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from nnlayers.BasicLSTMLayer import BasicLSTMLayer</span><br><span class="line">mnist = input_data.read_data_sets(&apos;tmp/data&apos;, one_hot = True)</span><br></pre></td></tr></table></figure>
-<h6 id="设置数据集的training次数、mnist的label数量、batch-size、time-steps-amp-num-input-mnist中数据为28-28的图片-、num-hidden等参数"><a href="#设置数据集的training次数、mnist的label数量、batch-size、time-steps-amp-num-input-mnist中数据为28-28的图片-、num-hidden等参数" class="headerlink" title="设置数据集的training次数、mnist的label数量、batch_size、time_steps&amp;num_input(mnist中数据为28*28的图片)、num_hidden等参数"></a>设置数据集的training次数、mnist的label数量、batch_size、time_steps&amp;num_input(mnist中数据为28*28的图片)、num_hidden等参数</h6><ul>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">epochs = 10</span><br><span class="line">num_classes = 10</span><br><span class="line">batch_size = 128 </span><br><span class="line">timesteps = 28</span><br><span class="line">num_input = 28</span><br><span class="line">num_hidden = 128</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h6 id="初始化网络rnn输入和输出之后全连接层的参数"><a href="#初始化网络rnn输入和输出之后全连接层的参数" class="headerlink" title="初始化网络rnn输入和输出之后全连接层的参数"></a>初始化网络rnn输入和输出之后全连接层的参数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = tf.placeholder(&apos;float&apos;, [None, timesteps, num_input])</span><br><span class="line">y = tf.placeholder(&apos;float&apos;, [None, num_classes])</span><br><span class="line">layer = &#123;&apos;weights&apos;: tf.Variable(tf.random_normal([num_hidden, num_classes])),</span><br><span class="line">         &apos;biases&apos;: tf.Variable(tf.random_normal([num_classes]))&#125;</span><br><span class="line">lstm_layer = BasicLSTMLayer(None, &apos;test_lstm_layer&apos;, None, None,</span><br><span class="line">                            **&#123;&apos;num_hidden&apos;: num_hidden, &apos;input&apos;: x, &apos;timesteps&apos;: timesteps&#125;)</span><br></pre></td></tr></table></figure>
-<h2 id="LSTM的两种实现"><a href="#LSTM的两种实现" class="headerlink" title="LSTM的两种实现"></a>LSTM的两种实现</h2><h3 id="static-rnn"><a href="#static-rnn" class="headerlink" title="static_rnn"></a>static_rnn</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = tf.unstack(x, timesteps, 1)</span><br><span class="line">#equivalently:</span><br><span class="line">#x = tf.transpose(x, [1,0,2])</span><br><span class="line">#x = tf.reshape(x, [-1, chunk_size])</span><br><span class="line">#x = tf.split(x, n_chunks, 0)</span><br><span class="line">lstm_cell = rnn.BasicLSTMCell(num_hidden, forget_bias=1.0)</span><br><span class="line">outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)</span><br></pre></td></tr></table></figure>
-<h3 id="dynamic-rnn"><a href="#dynamic-rnn" class="headerlink" title="dynamic_rnn"></a>dynamic_rnn</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lstm_cell = rnn.BasicLSTMCell(num_hidden, forget_bias=1.0)</span><br><span class="line">outputs, states = tf.nn.dynamic_rnn(lstm_cell, x, time_major=False, dtype=tf.float32)</span><br></pre></td></tr></table></figure>
-<h2 id="对LSTM输出结果的处理"><a href="#对LSTM输出结果的处理" class="headerlink" title="对LSTM输出结果的处理"></a>对LSTM输出结果的处理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 如果使用static_rnn实现的话,这句话就不需要：</span><br><span class="line">outputs = tf.unstack(tf.transpose(outputs, [1, 0, 2])) #LSTM网络会将每个时刻的output append到outputs中,所以通过output[-1]取出最后一个时刻的输出</span><br><span class="line">prediction = tf.add(tf.matmul(outputs[-1], layer[&apos;weights&apos;]), layer[&apos;biases&apos;]) #全连接层</span><br><span class="line">cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction, labels=y))#计算cost</span><br><span class="line">optimizer = tf.train.AdamOptimizer().minimize(cost)#优化网络中的参数</span><br></pre></td></tr></table></figure>
-<h2 id="将以上步骤串起来通过Session进行计算"><a href="#将以上步骤串起来通过Session进行计算" class="headerlink" title="将以上步骤串起来通过Session进行计算"></a>将以上步骤串起来通过Session进行计算</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">with tf.Session() as sess:</span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line">    for epoch in range(epochs):</span><br><span class="line">        epoch_loss = 0</span><br><span class="line">        for _ in range(int(mnist.train.num_examples / batch_size)):</span><br><span class="line">            epoch_x, epoch_y = mnist.train.next_batch(batch_size)</span><br><span class="line">            epoch_x = epoch_x.reshape((batch_size, timesteps, num_input))</span><br><span class="line">            _, c = sess.run([optimizer, cost], feed_dict=&#123;x: epoch_x, y: epoch_y&#125;)</span><br><span class="line">            epoch_loss += c</span><br><span class="line"></span><br><span class="line">        print(&apos;Epoch&apos;, epoch, &apos;completed out of&apos;, epochs, &apos;loss:&apos;, epoch_loss)</span><br><span class="line"></span><br><span class="line">    correct = tf.equal(tf.argmax(prediction, 1), tf.arg_max(y, 1))</span><br><span class="line">    accuracy = tf.reduce_mean(tf.cast(correct, &apos;float&apos;))</span><br><span class="line">    print(&apos;Accuracy:&apos;, accuracy.eval(&#123;x: mnist.test.images.reshape((-1, timesteps, num_input)), y: mnist.test.labels&#125;))</span><br></pre></td></tr></table></figure>
-<h2 id="完成！最终的training-Accuracy"><a href="#完成！最终的training-Accuracy" class="headerlink" title="完成！最终的training Accuracy:"></a>完成！最终的training Accuracy:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">……</span><br><span class="line">Epoch 7 completed out of 10 loss: 16.02936139</span><br><span class="line">Epoch 8 completed out of 10 loss: 14.0518430057</span><br><span class="line">Epoch 9 completed out of 10 loss: 12.9981804799</span><br><span class="line">Accuracy: 0.9826</span><br></pre></td></tr></table></figure>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
-<li><a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="noopener">Understanding LSTM Networks</a></li>
-<li><a href="http://www.jeyzhang.com/understanding-lstm-network.html" target="_blank" rel="noopener">理解LSTM网络</a></li>
-<li><a href="http://www.wildml.com/2016/08/rnns-in-tensorflow-a-practical-guide-and-undocumented-features/" target="_blank" rel="noopener">RNNs in Tensorflow, a Practical Guide and Undocumented Features</a></li>
-<li><a href="https://pythonprogramming.net/rnn-tensorflow-python-machine-learning-tutorial/?completed=/recurrent-neural-network-rnn-lstm-machine-learning-tutorial/" target="_blank" rel="noopener">RNN w/ LSTM cell example in TensorFlow and Python</a></li>
-<li><a href="https://morvanzhou.github.io/tutorials/machine-learning/tensorflow/5-08-RNN2/" target="_blank" rel="noopener">RNN LSTM 循环神经网络 (分类例子)</a></li>
-<li><a href="https://github.com/aymericdamien/TensorFlow-Examples" target="_blank" rel="noopener">TensorFlow-Examples</a></li>
-</ol>
-
-          
+          预备知识比较经典的博客:Understanding LSTM Networks中文版:理解LSTM网络TensorFlow相关函数unstack1unstack(value, num=Nonde, axis=0, name=&apos;unstack&apos;)
+将rank-R维的tensor分解
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/19/first-article-by-myself/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -404,7 +387,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="xuchaoucas.github.io/2017/12/18/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://xuchaoucas.github.io/2017/12/18/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xuchao">
@@ -486,17 +469,15 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/18/hello-world/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -761,7 +742,7 @@
   
 
     
-      <script id="dsq-count-scr" src="https://chax.disqus.com/count.js" async></script>
+      <script id="dsq-count-scr" src="https://xuchao.disqus.com/count.js" async></script>
     
 
     
